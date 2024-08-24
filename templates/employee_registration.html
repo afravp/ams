@@ -1,0 +1,320 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    {% include 'head.html' %}
+    <body>
+        <!-- START PAGE CONTAINER -->
+        <div class="page-container">
+            
+            <!-- START PAGE SIDEBAR -->
+          {% include 'sidebar.html' %}
+            <!-- END PAGE SIDEBAR -->
+            <div class="page-content">
+            <!-- PAGE CONTENT -->
+         {% include 'nav.html' %}
+         <!-- PAGE CONTENT WRAPPER -->
+         <!-- PAGE TITLE -->
+         <div class="page-title">                    
+            <h2><span class="fa fa-arrow-circle-o-left"></span>EMPLOYEE REGISTRATION</h2>
+        </div>
+        <!-- END PAGE TITLE --> 
+        <!-- PAGE CONTENT WRAPPER -->
+        <div class="page-content-wrap">                
+                
+            <div class="row">
+               
+
+                    <!-- START VALIDATIONENGINE PLUGIN -->   
+                        <h4></h4>                          
+                        <form  class="form-horizontal" method="POST">
+                            {% csrf_token %}
+                            <div class="col-md-6">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong></strong></h3>
+                                    <ul class="panel-controls">
+                                        <li><a class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>
+                                </div>
+                                <div class="panel-body">
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Name:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="emp_name" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">DOB:</label>
+                                <div class="col-md-9">
+                                    <input type="date" class="form-control" id="password" name="dob" required/>
+                                </div>
+                            </div>  
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Gender:</label>
+                                    <div class="col-md-9 col-xs-12">
+                                    <select class="form-control" id="formGender" name="gender" required>
+                                        <option value="">--select--</option>
+                                        <option value="0">Male</option>
+                                        <option value="1">Female</option>
+                                        <option value="2">Other</option>
+                                    </select> 
+                                </div>                                               
+                            </div>                  
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Mobile:</label>
+                                <div class="col-md-9">
+                                    <input type="number" class="form-control" name="mobile" required/>
+                                </div>
+                            </div>                            
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Email:</label>
+                                <div class="col-md-9">
+                                    <input type="email" class="form-control" name="email" required/>
+                                </div>                        
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Address:</label>
+                                <div class="col-md-9">
+                                    <textarea class='col-md-12' rows='5' name="address" required></textarea>
+                                </div>                        
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Employee Area:</label>
+                                    <div class="col-md-9 col-xs-12">
+                                    <select class="form-control" id="employee" onchange="empdropdown();" name="employee_area" required>
+                                        <option value="">--select--</option>
+                                        {% for i in employee %}
+                                        <option value="{{i.id}}_{{i.area}}">{{i.ename}}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </div>                                               
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Qualification:</label>
+                                    <div class="col-md-9 col-xs-12">
+                                    <select class="form-control" id="formGender" name="qualification" required>
+                                        <option value="">--select--</option>
+                                        {% for i in qualification %}
+                                        <option value="{{i.id}}">{{i.qname}}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </div>                                               
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Designation:</label>
+                                    <div class="col-md-9 col-xs-12">
+                                    <select class="form-control" id="formGender" name="designation" required>
+                                        <option value="">--select--</option>
+                                        {% for i in designation %}
+                                        <option value="{{i.id}}">{{i.dsname}}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </div>                                               
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Department:</label>
+                                    <div class="col-md-9 col-xs-12">
+                                    <select class="form-control" id="formGender" name="department" required>
+                                        <option value="">--select--</option>
+                                        {% for i in department %}
+                                        <option value="{{i.id}}">{{i.dname}}</option>
+                                        {% endfor %}
+                                    </select> 
+                                </div>                                               
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Salary:</label>
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control" name="salary" required/>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Join Date:</label>
+                                <div class="col-md-9">
+                                    <input type="date" class="form-control" name="join_date" required/>
+                                </div>
+                            </div> 
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Photo</label>
+                                <div class="col-md-9">
+                                    <input type="file" class="form-control" name="photo" required/>
+                                </div>
+                            </div>                                
+                            <div class="panel-footer">
+                                <button class="btn btn-default">Clear Form</button>                                    
+                                <button class="btn btn-primary pull-right">Submit</button>
+                            </div>
+                        </div>  
+                    </div>                                                              
+                                             
+                    <!-- END VALIDATIONENGINE PLUGIN -->
+
+                </div>
+                <div class="col-md-6">                        
+
+                    <!-- START JQUERY VALIDATION PLUGIN -->
+                    <div class="block" style='display:none' id="epdropdown">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <h3 class="panel-title"><strong>Teacher Details</strong></h3>
+                                    <ul class="panel-controls">
+                                        <li><a class="panel-remove"><span class="fa fa-times"></span></a></li>
+                                    </ul>
+                                </div>
+                            <div class="panel-body">                                    
+                            <div class="form-group">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                <label class="col-md-3 control-label">Class</label>
+                                    <select class="form-control" id="class" name="class" onchange="selectsubjects(this.value);">
+                                        <option value="">--select--</option>
+                                        {% for i in class %}
+                                        <option value="{{i.id}}">{{i.cname}}</option>
+                                        {% endfor %}
+                                    </select>                                          
+                            </div>
+                           
+                                <div class="col-md-4">
+                                <label class="col-md-3 control-label">Subject</label>
+                                    <select class="form-control" id="subject" name="subject">
+                                        <option value="">--select--</option>
+                                        {% comment %} {% for i in subject %}
+                                        <option value="{{i.class_id}}">{{i.sub_name}}</option>
+                                        {% endfor %} {% endcomment %}
+                                    </select>                                                
+                          
+                        </div>
+                            
+                                <div class="col-md-4">
+                                <label class="col-md-3 control-label">Division</label>
+                                    <select class="form-control" id="division" name="division" >
+                                        <option value="">--select--</option>
+                                        {% for i in division %}
+                                        <option value="{{i.id}}">{{i.divname}}</option>
+                                        {% endfor %} 
+                                    </select>                                               
+                           
+                        </div> 
+                    </div>    
+                </div> 
+            </div>                                                                                      
+                            <div class="panel-footer">
+                                <input type="button" value="ADD" onclick="addtoTable()">
+                            </div>                                                                                                                          
+                        </div>                               
+                    <!-- END JQUERY VALIDATION PLUGIN -->
+                    </div>
+                </div>
+            </form>
+       
+            <div class="col-md-6">
+                        <div class="panel panel-default">
+                        <div class="panel-heading">                                
+                            <h3 class="panel-title">Default</h3>
+                            <ul class="panel-controls">
+                                <li><a href="#" class="panel-collapse"><span class="fa fa-angle-down"></span></a></li>
+                                <li><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
+                                <li><a href="#" class="panel-remove"><span class="fa fa-times"></span></a></li>
+                            </ul>                                
+                        </div>
+                        <div class="panel-body">
+                        <table class="table datatable" id="teacherTable">
+                            <thead>
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Division</th>
+                                    <th>Subject</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                  <td></td>
+                                </tbody>
+                                </table>
+                            </div>
+                        </div> 
+                    </div> 
+                </div>
+                
+        </div>
+        <!-- END PAGE CONTENT WRAPPER -->                           
+    <!-- END PAGE CONTENT -->
+    </div>
+<!-- END PAGE CONTAINER -->
+</div>
+<!-- MESSAGE BOX-->
+<!-- MESSAGE BOX-->
+{% include 'message.html' %}
+<!-- END MESSAGE BOX-->
+<!-- END MESSAGE BOX-->
+
+<!-- START PRELOADS -->
+
+<!-- END PRELOADS -->                 
+
+<!-- START SCRIPTS -->
+
+<!-- END THIS PAGE PLUGINS -->               
+{% include 'scripts.html' %}
+<script type="text/javascript" src="{% static 'js/plugins/datatables/jquery.dataTables.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/demo_tables.js' %}"></script>  
+<!-- START TEMPLATE -->
+
+<!-- END TEMPLATE -->
+
+{% comment %} <script type="text/javascript">
+    var jvalidate = $("#jvalidate").validate({
+        ignore: [],
+        rules: {                                            
+                login: {
+                        required: true,
+                        minlength: 2,
+                        maxlength: 8
+                },
+                password: {
+                        required: true,
+                        minlength: 5,
+                        maxlength: 10
+                },
+                're-password': {
+                        required: true,
+                        minlength: 5,
+                        maxlength: 10,
+                        equalTo: "#password2"
+                },
+                age: {
+                        required: true,
+                        min: 18,
+                        max: 100
+                },
+                email: {
+                        required: true,
+                        email: true
+                },
+                date: {
+                        required: true,
+                        date: true
+                },
+                credit: {
+                        required: true,
+                        creditcard: true
+                },
+                site: {
+                        required: true,
+                        url: true
+                }
+            }                                        
+        });                                    
+
+</script> {% endcomment %}
+
+<!-- END SCRIPTS -->          
+
+</body>
+</html>
+
+
+
